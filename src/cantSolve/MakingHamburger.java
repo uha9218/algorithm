@@ -1,18 +1,21 @@
 package cantSolve;
 
+import java.util.Stack;
+
 public class MakingHamburger {
     public static void main(String[] args) {
-        int[] ingredients = {1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1};
+        int[] ingredients = {2, 1, 1, 2, 3, 1, 2, 3, 1};
         System.out.println(solution(ingredients));
     }
     public static int solution(int[] ingredient) {
         int answer=0;
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i : ingredient){stringBuilder.append(i);}
-        String ingredientString = stringBuilder.toString();
-        while(ingredientString.contains(String.valueOf("1231"))){
-             ingredientString = ingredientString.replaceFirst("1231","");
-             answer++;
+        for (int i = 0; i < ingredient.length; i++) {
+            stringBuilder.append(ingredient[i]);
+            if(stringBuilder.length()>3 && stringBuilder.substring(stringBuilder.length()-4,stringBuilder.length()).equals("1231")){
+                answer++;
+                stringBuilder.delete(stringBuilder.length()-4,stringBuilder.length());
+            }
         }
         return answer;
     }
